@@ -56,7 +56,7 @@ export const fetchShow = () => {
     .then(res => return res) // or res.data, however you want to set that up
 }
   
- // App.js
+ // App.js 
 useEffect(() => {
   fetchShow
     .then(res => {
