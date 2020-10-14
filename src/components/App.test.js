@@ -92,7 +92,7 @@ const episodesData = [  {
     }
 }]
 
-test("renders correctly", async () => {
+test("renders correctly", () => {
 
     mockFetchShow.mockResolvedValueOnce(episodesData)
     
@@ -104,11 +104,7 @@ test("renders correctly", async () => {
     
 
     fireEvent.click(dropdown, {target: {value: "Season 1" }})
-
-
-    await wait(expect(episodesList).toHaveLength(1))
    
 })
-
 
 
