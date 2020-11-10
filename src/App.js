@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Dropdown from "react-dropdown";
 import parse from "html-react-parser";
 
@@ -18,11 +17,13 @@ export default function App() {
   useEffect(() => {
     fetchShow ()
         .then(res => {
-          setShow(res.data);
-          setSeasons(formatSeasons(res.data._embedded.episodes));
+          setShow(res);
+          setSeasons(formatSeasons(res._embedded.episodes));
         })
-    .catch(err => {});
-  }, []);
+        .catch(err => {
+          console.log(err)
+        })
+  },[]);
 
 
 
@@ -39,13 +40,14 @@ export default function App() {
       <img className="poster-img" src={show.image.original} alt={show.name} />
       <h1>{show.name}</h1>
       {parse(show.summary)}
-      <Dropdown
+      <Dropdown 
+        data-testid = 'dropdown'
         options={Object.keys(seasons)}
         onChange={handleSelect}
         value={selectedSeason || "Select a season"}
         placeholder="Select an option"
       />
-      <Episodes episodes={episodes} />
+      <Episodes data-testid = 'episode' episodes={episodes} />
     </div>
   );
 }
